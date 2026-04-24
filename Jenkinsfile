@@ -29,6 +29,14 @@ pipeline {
                 bat './mvnw package'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                echo 'Building Docker image...'
+                bat 'docker build -t simple-java-maven-app .'
+                bat 'docker compose up --build -d'
+            }
+        }
     }
 
     post {
